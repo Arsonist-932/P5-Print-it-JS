@@ -54,15 +54,3 @@ function createDots() {
   }
 }
 createDots();
-
-// Création du Caroussel
-function carousselSlide() {
-  let positionSlide = 0;
-  for (let i = 0; i < slides.length; i++) {
-    const imgSlide = document.querySelector(".banner-img");
-    slides.src = slides[i].image;
-    let img = slides.src;
-
-    console.log(img);
-  }
-}
