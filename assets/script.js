@@ -93,8 +93,7 @@ function slider(position) {
     "assets/images/slideshow/" + slides[currentSlide].image;
 
   // Modification de la Tagline de l'image
-  const p = (document.querySelector("#banner p").innerHTML =
-    slides[currentSlide].tagLine);
+  document.querySelector("#banner p").innerHTML = slides[currentSlide].tagLine;
 
   // Lancement de la fonction bullets pour changement de classe
   //a chaque slides sur les .dot
