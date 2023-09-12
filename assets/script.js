@@ -30,14 +30,20 @@ let numberOfSlides = 4;
 // EVent Listener //
 left.addEventListener("click", () => {
   console.log("Click on the arrow left");
-  position = +1;
+  position = -1;
   slider(position);
+  // Console du Slides
+  console.log(slides[currentSlide].tagLine);
+  console.log(slides[currentSlide].image);
 });
 
 right.addEventListener("click", () => {
   console.log("Click on the arrow right");
   position = +1;
   slider(position);
+  // Console du Slides
+  console.log(slides[currentSlide].tagLine);
+  console.log(slides[currentSlide].image);
 });
 
 // Création des bullets pour le slide
@@ -86,15 +92,9 @@ function slider(position) {
     "assets/images/slideshow/" + slides[currentSlide].image;
 
   // Modification de la Tagline de l'image
-  const p = (document.querySelector("#banner p").innerHTML =
-    slides[currentSlide].tagLine);
+  document.querySelector("#banner p").innerHTML = slides[currentSlide].tagLine;
 
   // Lancement de la fonction bullets pour changement de classe
   //a chaque slides sur les .dot
   bulletsActived(position);
 }
-
-// Console du Slides
-console.log(currentSlide);
-console.log(slides[currentSlide].image);
-console.log(p);
