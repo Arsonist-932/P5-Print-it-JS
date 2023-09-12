@@ -25,12 +25,12 @@ const right = document.querySelector(".arrow_right");
 // Variables //
 let position = 0;
 let currentSlide = 0;
-let numberOfSlides = slides[currentSlide];
+let numberOfSlides = 4;
 
 // EVent Listener //
 left.addEventListener("click", () => {
   console.log("Click on the arrow left");
-  position = -1;
+  position = +1;
   slider(position);
 });
 
@@ -42,7 +42,7 @@ right.addEventListener("click", () => {
 
 // Création des bullets pour le slide
 function createDot() {
-  for (let i = 0; i < numberOfSlides; i++) {
+  for (let i = 0; i < slides.length; i++) {
     // On récupère l'élément du DOM
     const dots = document.querySelector(".dots");
     const dot = document.createElement("div");
@@ -60,18 +60,19 @@ function bulletsActived() {
     const bulletsActive = bullets[i];
     console.log(bulletsActive);
 
-    if (i === position) {
+    if (i === currentSlide) {
       bulletsActive.classList.add("dot_selected");
     } else {
       bulletsActive.classList.remove("dot_selected");
     }
   }
 }
-bulletsActived();
 
 function slider(position) {
+  // Variable qui permet d'incrémenter position à currentSilde au clic
   currentSlide = currentSlide + position;
 
+  // Boucle permettant de rendre la Slide permanent
   if (currentSlide < 0) {
     currentSlide = slides.length - 1;
   }
@@ -80,14 +81,20 @@ function slider(position) {
     currentSlide = 0;
   }
 
+  // Modifications de l'image du slide
   document.querySelector(".banner-img").src =
     "assets/images/slideshow/" + slides[currentSlide].image;
 
-  // Console du Slides
-  console.log(currentSlide);
-  console.log(slides[currentSlide].image);
-
+  // Modification de la Tagline de l'image
   const p = (document.querySelector("#banner p").innerHTML =
     slides[currentSlide].tagLine);
-  console.log(p);
+
+  // Lancement de la fonction bullets pour changement de classe
+  //a chaque slides sur les .dot
+  bulletsActived(position);
 }
+
+// Console du Slides
+console.log(currentSlide);
+console.log(slides[currentSlide].image);
+console.log(p);
