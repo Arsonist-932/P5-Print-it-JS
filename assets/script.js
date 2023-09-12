@@ -18,43 +18,76 @@ const slides = [
   },
 ];
 
-// Variables
-const right = document.querySelector(".arrow_right");
+// Constantes //
 const left = document.querySelector(".arrow_left");
+const right = document.querySelector(".arrow_right");
 
-// EventListener
-left.addEventListener("click", function () {
-  console.log("Click on the left");
+// Variables //
+let position = 0;
+let currentSlide = 0;
+let numberOfSlides = slides[currentSlide];
+
+// EVent Listener //
+left.addEventListener("click", () => {
+  console.log("Click on the arrow left");
+  position = -1;
+  slider(position);
 });
 
-right.addEventListener("click", function () {
-  console.log("Click on the right");
+right.addEventListener("click", () => {
+  console.log("Click on the arrow right");
+  position = +1;
+  slider(position);
 });
 
-// Création des bullets
-function createDots() {
-  for (let i = 0; i < slides.length; i++) {
-    //Récupération d'un élément du DOM
+// Création des bullets pour le slide
+function createDot() {
+  for (let i = 0; i < numberOfSlides; i++) {
+    // On récupère l'élément du DOM
     const dots = document.querySelector(".dots");
-    // Création de la balise div & ajout de la class .dots
     const dot = document.createElement("div");
-    dot.setAttribute("class", "dot");
+    dot.classList.add("dot");
     dots.appendChild(dot);
   }
 }
-createDots();
-let position = 0;
+createDot();
 
-function bulletActived() {
+// Liaisons des bullets au slide
+function bulletsActived() {
   const bullets = document.querySelectorAll(".dot");
-  console.log(bullets);
+
   for (let i = 0; i < bullets.length; i++) {
-    let bullet = bullets[i];
-    console.log(bullet);
+    const bulletsActive = bullets[i];
+    console.log(bulletsActive);
 
     if (i === position) {
-      bullet.classList.add("dot_selected");
+      bulletsActive.classList.add("dot_selected");
+    } else {
+      bulletsActive.classList.remove("dot_selected");
     }
   }
 }
-bulletActived();
+bulletsActived();
+
+function slider(position) {
+  currentSlide = currentSlide + position;
+
+  if (currentSlide < 0) {
+    currentSlide = slides.length - 1;
+  }
+
+  if (currentSlide > slides.length - 1) {
+    currentSlide = 0;
+  }
+
+  document.querySelector(".banner-img").src =
+    "assets/images/slideshow/" + slides[currentSlide].image;
+
+  // Console du Slides
+  console.log(currentSlide);
+  console.log(slides[currentSlide].image);
+
+  const p = (document.querySelector("#banner p").innerHTML =
+    slides[currentSlide].tagLine);
+  console.log(p);
+}
