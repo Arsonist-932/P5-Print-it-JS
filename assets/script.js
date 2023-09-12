@@ -33,7 +33,6 @@ right.addEventListener("click", function () {
 
 // Création des bullets
 function createDots() {
-  let currentSlide = 0;
   for (let i = 0; i < slides.length; i++) {
     //Récupération d'un élément du DOM
     const dots = document.querySelector(".dots");
@@ -41,16 +40,21 @@ function createDots() {
     const dot = document.createElement("div");
     dot.setAttribute("class", "dot");
     dots.appendChild(dot);
-
-    // Génération de la class .dot_selected
-    // Si i vaut ma variable CurrentSlide
-    if (i === currentSlide) {
-      // Tu ajoute la classe suivante
-      dot.classList.add("dot_selected");
-    } else {
-      // Sinon tu la retire
-      dot.classList.remove("dot_selected");
-    }
   }
 }
 createDots();
+let position = 0;
+
+function bulletActived() {
+  const bullets = document.querySelectorAll(".dot");
+  console.log(bullets);
+  for (let i = 0; i < bullets.length; i++) {
+    let bullet = bullets[i];
+    console.log(bullet);
+
+    if (i === position) {
+      bullet.classList.add("dot_selected");
+    }
+  }
+}
+bulletActived();
